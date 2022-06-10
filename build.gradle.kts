@@ -4,7 +4,8 @@ plugins {
     kotlin("jvm") version "1.6.21"
     id("com.github.johnrengelman.shadow") version ("7.1.2")
 
-    kotlin("plugin.serialization") version "1.6.21"
+    // Serialization
+    kotlin("plugin.serialization") version "1.4.20"
 }
 
 group = "me.sadev"
@@ -32,6 +33,9 @@ dependencies {
     // Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+
+    // Configuration
+    implementation("com.github.uchuhimo.konf:konf:master-SNAPSHOT")
 
     // Logging utils
     implementation("io.github.microutils:kotlin-logging-jvm:2.1.21")

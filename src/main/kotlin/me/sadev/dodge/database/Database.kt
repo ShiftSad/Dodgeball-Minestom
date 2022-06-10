@@ -3,10 +3,9 @@ package me.sadev.dodge.database
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import me.sadev.dodge.ConfigManager
-import java.sql.SQLException
 
 object Database {
-    lateinit var dataSource: HikariDataSource;
+    lateinit var dataSource: HikariDataSource
 
     fun init() {
         // Setup DataSource
@@ -15,7 +14,7 @@ object Database {
         config.username = ConfigManager.config.username
         config.password = ConfigManager.config.password
         config.driverClassName = ConfigManager.config.driverClassName
-        config.maximumPoolSize = ConfigManager.config.poolSize
+        config.maximumPoolSize = ConfigManager.config.poolSize!!
 
         dataSource = HikariDataSource(config)
 

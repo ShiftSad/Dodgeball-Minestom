@@ -1,21 +1,30 @@
 package me.sadev.dodge
 
-class Config {
-    // Config
-    val ip: String = "0.0.0.0"
-    val port: Int = 10014
-    val unknownCommand: String = "Comando desconhecido!"
+import com.uchuhimo.konf.source.yaml
+import com.uchuhimo.konf.toValue
 
-    // Mysql configuration
-    val jdbcUrl = "jdbc:mysql://190.115.196.20:3306/s21410_jogo"
-    val username = "u21410_uPxelVqfvT"
-    val password = "@K5tZBttoqpFVzapppl+bC3x"
-    val driverClassName = "com.mysql.jdbc.Driver"
-    val poolSize = 20
-}
+data class Config(
+    // Server config
+    var ip: String? = "0.0.0.0",
+    var port: Int? = 25565,
+    var unknownCommand: String? = "Comando desconhecido",
+
+    // MySQL configuration
+    var jdbcUrl: String? = "jdbc:mysql://localhost:3306/database",
+    var username: String? = "username",
+    var password: String? = "password123",
+    var driverClassName: String? = "com.mysql.jdbc.Driver",
+    var poolSize: Int? = 20
+)
 
 object ConfigManager {
 
     @JvmStatic
-    val config = Config()
+    lateinit var config: Config
+
+    fun loadConfig() {
+        config = com.uchuhimo.konf.Config()
+            .from.yaml.resource("config.json")
+            .toValue()
+    }
 }
