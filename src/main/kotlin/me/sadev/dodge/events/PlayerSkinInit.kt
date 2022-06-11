@@ -12,11 +12,11 @@ class PlayerSkinInit {
     init {
         Manager.globalEvent.listenOnly<PlayerSkinInitEvent> {
             val player: Player = this.player
-            object : MinestomRunnable(executionType = ExecutionType.ASYNC) {
+            object : MinestomRunnable(executionType = ExecutionType.ASYNC) { // Runnable para executar ASYNC call no database
                 override fun run() {
-                    player.skin = PlayerSkin.fromUsername(player.username)
+                    player.skin = PlayerSkin.fromUsername(player.username) // PlayerSKin.fromUsername faz 2 requests, no qual precisam ser ASYNC
                 }
-            }.also { it.schedule() }
+            }.also { it.schedule() } // Rodar o schedule
         }
     }
 }

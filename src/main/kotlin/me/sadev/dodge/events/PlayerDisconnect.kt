@@ -13,7 +13,7 @@ class PlayerDisconnect {
         Manager.globalEvent.listenOnly<PlayerDisconnectEvent> {
             val player: Player = this.player
 
-            Audiences.all().sendMessage(
+            Audiences.all().sendMessage( // Manda para todos os jogadores mensagem de saida
                 Component.text(
                 "${player.username} saiu.",
                 NamedTextColor.RED

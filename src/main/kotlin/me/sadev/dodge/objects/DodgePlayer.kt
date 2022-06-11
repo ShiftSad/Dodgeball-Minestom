@@ -2,7 +2,7 @@ package me.sadev.dodge.objects
 
 
 data class DodgePlayer(
-    val name: String, // Player's username
+    val name: String, // Player's username (Identifier)
     val UUID: String? = null, // Auto generated on mysql side, player's unique UUID
     val created: Long? = System.currentTimeMillis(), // Auto generated, when user was created
 

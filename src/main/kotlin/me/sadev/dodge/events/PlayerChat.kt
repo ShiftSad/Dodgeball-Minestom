@@ -9,9 +9,9 @@ import world.cepi.kstom.event.listenOnly
 class PlayerChat {
     init {
         Manager.globalEvent.listenOnly<PlayerChatEvent> {
-            this.setChatFormat {
+            this.setChatFormat { // Muda a mensagem do evento
                 Component.text(it.player.username).append(Component.text(" | ",
-                    NamedTextColor.DARK_GRAY)).append(Component.text(it.message, NamedTextColor.WHITE))
+                    NamedTextColor.DARK_GRAY)).append(Component.text(it.message, NamedTextColor.WHITE)) // -> player | Mensagem
             }
         }
     }

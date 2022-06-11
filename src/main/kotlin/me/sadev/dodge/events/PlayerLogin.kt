@@ -18,21 +18,20 @@ import world.cepi.kstom.util.MinestomRunnable
 class PlayerLogin {
     init {
         Manager.globalEvent.listenOnly<PlayerLoginEvent> {
-            val player: Player = this.player
-            this.setSpawningInstance(Lobby.instance)
-            player.respawnPoint = Pos(0.0, 42.0, 0.0)
+            this.setSpawningInstance(Lobby.instance) // Mundo no qual o jogador vai entrar
+            player.respawnPoint = Pos(0.0, 42.0, 0.0) // Teleporta o jogador ao spawn
 
-            Audiences.all().sendMessage(Component.text(
+            Audiences.all().sendMessage(Component.text(  // Manda para todos os jogadores mensagem de entrada
                 "${player.username} entrou.",
                 NamedTextColor.GREEN
             ))
 
-            object : MinestomRunnable(executionType = ExecutionType.ASYNC) {
+            object : MinestomRunnable(executionType = ExecutionType.ASYNC) { // Runnable para executar ASYNC call no database
                 override fun run() {
-                    if (DBCrud().existsPlayer(player)) return
+                    if (DBCrud().existsPlayer(player)) return // Se o jogador existe, não precisa criar no db
                     DBCrud().createPlayer(player)
                 }
-            }.also { it.schedule() }
+            }.also { it.schedule() } // Rodar o schedule
         }
     }
 }

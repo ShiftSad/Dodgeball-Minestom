@@ -12,6 +12,7 @@ class DBCrud {
 
     private val logger: Logger = LoggerFactory.getLogger("Database")
 
+    // Cria o jogador no database
     fun createPlayer(player: Player) {
         val query: String = """
         INSERT INTO DodgePlayers(name, UUID, created, playedTime, status, matches)
@@ -19,29 +20,30 @@ class DBCrud {
         """.trimIndent()
 
         with (Database.dataSource.connection) {
-            createStatement().execute(query)
-            this.close()
+            createStatement().execute(query) // Executa o query no db
+            this.close() // Encerra a poll, para não atingir limit do db
         }
 
         logger.info("Usuario ${player.username} criado com sucesso")
     }
 
+    // Boolean se o jogador existe
     fun existsPlayer(player: Player): Boolean {
         val query: String = """
         SELECT * FROM DodgePlayers WHERE name = ${player.username};
         """.trimIndent()
 
         with (Database.dataSource.connection) {
-            val result = createStatement().executeQuery(query)
-            this.close()
-            logger.info(result.first().toString())
-            if (result.first()) return true
+            val result = createStatement().executeQuery(query)  // Executa o query no db
+            if (result.first()) return true // TODO - não funciona
+            this.close() // Encerra a poll, para não atingir limit do db
         }
 
         logger.info("Usuario ${player.username} criado com sucesso")
         return true
     }
 
+    // Atualizar um player no database
     fun updatePlayer(player: DodgePlayer) {
         val query: String = """
         UPDATE DodgePlayers(name, UUID, created, playedTime, status, matches)
@@ -49,8 +51,8 @@ class DBCrud {
         """.trimIndent()
 
         with (Database.dataSource.connection) {
-            createStatement().execute(query)
-            this.close()
+            createStatement().execute(query)  // Executa o query no db
+            this.close() // Encerra a poll, para não atingir limit do db
         }
 
         logger.info("Usuario ${player.name} atualizado com sucesso")
@@ -63,8 +65,8 @@ class DBCrud {
         """.trimIndent()
 
         with (Database.dataSource.connection) {
-            createStatement().execute(query)
-            this.close()
+            createStatement().execute(query)  // Executa o query no db
+            this.close() // Encerra a poll, para não atingir limit do db
         }
 
         logger.info("Usuario ${player.name} apagado com sucesso")

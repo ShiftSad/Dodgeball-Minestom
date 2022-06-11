@@ -15,12 +15,12 @@ import java.util.concurrent.atomic.AtomicReference
 
 class SetupEvents {
     init {
-        PlayerChat()
-        PlayerDisconnect()
-        PlayerLogin()
-        PlayerSkinInit()
+        PlayerChat()        // Init PlayerChat
+        PlayerDisconnect()  // Init PlayerDisconnect
+        PlayerLogin()       // Init PlayerLogin
+        PlayerSkinInit()    // Init PlayerSkin
 
-        runStats()
+        runStats()          // Cool server stats on tab
     }
 
     private fun runStats() {

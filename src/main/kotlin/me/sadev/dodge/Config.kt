@@ -3,6 +3,7 @@ package me.sadev.dodge
 import com.uchuhimo.konf.source.yaml
 import com.uchuhimo.konf.toValue
 
+// Config data class
 data class Config(
     // Server config
     var ip: String? = "0.0.0.0",
@@ -22,6 +23,7 @@ object ConfigManager {
     @JvmStatic
     lateinit var config: Config
 
+    // Atualiza a classe config da config.json
     fun loadConfig() {
         config = com.uchuhimo.konf.Config()
             .from.yaml.resource("config.json")
