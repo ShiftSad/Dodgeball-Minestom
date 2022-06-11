@@ -2,6 +2,7 @@ package me.sadev.dodge.database
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import me.sadev.dodge.objects.DodgePlayer
 import me.sadev.dodge.objects.DodgeStatus
 import net.minestom.server.entity.Player
 import org.slf4j.Logger
@@ -39,5 +40,33 @@ class DBCrud {
 
         logger.info("Usuario ${player.username} criado com sucesso")
         return true
+    }
+
+    fun updatePlayer(player: DodgePlayer) {
+        val query: String = """
+        UPDATE DodgePlayers(name, UUID, created, playedTime, status, matches)
+        VALUES ('${player.name}', '${player.UUID}', ${player.created}, 0, '${Json.encodeToString(player.status)}', '${Json.encodeToString(player.matches)}');
+        """.trimIndent()
+
+        with (Database.dataSource.connection) {
+            createStatement().execute(query)
+            this.close()
+        }
+
+        logger.info("Usuario ${player.name} atualizado com sucesso")
+    }
+
+    fun deletePlayer(player: Player) {
+        val query: String = """
+        DELETE FROM DodgePlayers
+        WHERE name = '${player.name}'
+        """.trimIndent()
+
+        with (Database.dataSource.connection) {
+            createStatement().execute(query)
+            this.close()
+        }
+
+        logger.info("Usuario ${player.name} apagado com sucesso")
     }
 }

@@ -24,11 +24,13 @@ object Database {
 
     private fun createTable() {
         val query: String = """
-            CREATE TABLE IF NOT EXISTS sapiens_Vips (
-                Name       varchar(50) not null primary key,
+            CREATE TABLE IF NOT EXISTS DodgeStatus (
+                name       varchar(50) not null primary key,
                 UUID       varchar(36) not null,
-                Started    BIGINT      not null,
-                Permission varchar(50) not null
+                created    bigint      not null,
+                playedTime bigint      null,
+                status     text        null,
+                matches    mediumtext  null
             );
         """.trimIndent()
         with (dataSource.connection) {
