@@ -32,7 +32,7 @@ object Database {
             );
         """.trimIndent()
         with (dataSource.connection) {
-            createStatement().executeQuery(query)
+            createStatement().execute(query)
             this.close()
         }
     }

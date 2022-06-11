@@ -5,7 +5,7 @@ import net.minestom.server.command.ConsoleSender
 import world.cepi.kstom.command.kommand.Kommand
 import kotlin.system.exitProcess
 
-object CommandStop : Kommand({
+internal object CommandStop : Kommand({
     condition {
         sender.hasPermission("server.stop")
                 || sender is ConsoleSender

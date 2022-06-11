@@ -1,6 +1,7 @@
 package me.sadev.dodge
 
 import com.github.ajalt.mordant.rendering.TextColors
+import me.sadev.dodge.commands.CommandGamemode
 import me.sadev.dodge.commands.CommandStop
 import me.sadev.dodge.database.Database
 import me.sadev.dodge.events.SetupEvents
@@ -16,13 +17,13 @@ fun main() {
         // Initialize the server
         val minecraftServer = MinecraftServer.init()
 
-        // Inicializar config
+        // Initialize config
         ConfigManager.loadConfig()
 
         // Load lobby
         Lobby.init()
 
-        // Iniciar database
+        // Initialize database
         Database.init()
 
         // Register events
@@ -30,6 +31,7 @@ fun main() {
 
         // Register commands
         CommandStop.register()
+        CommandGamemode.register()
 
         // Boots up the server
         minecraftServer.start(ConfigManager.config.ip!!, ConfigManager.config.port!!)
